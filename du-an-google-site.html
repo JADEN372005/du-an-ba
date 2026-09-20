@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dự án học thuật - Trịnh Quốc Toản</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Newsreader:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F7FA;
+    --surface: #FFFFFF;
+    --ink: #16232F;
+    --muted: #56646F;
+    --blue: #1F4E79;
+    --blue-dark: #163A5C;
+    --tint: #E4EDF5;
+    --rule: #C9D5E0;
+    --mark: #FFE58A;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; height: auto !important; overflow: visible !important; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.6;
+    height: auto !important; overflow: visible !important;
+  }
+  .page { max-width: 880px; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) 3rem; }
+
+  /* Đầu trang */
+  .who { margin: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--blue); line-height: 1.3; }
+  .role { margin: 0; color: var(--muted); font-size: .95rem; }
+  h1 {
+    margin: 1.5rem 0 .75rem; font-family: var(--serif); font-weight: 600;
+    font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.08; letter-spacing: -0.015em; max-width: 20ch;
+  }
+  .lead { margin: 0; max-width: 60ch; font-size: 1.05rem; }
+  .lead mark { background: linear-gradient(transparent 55%, var(--mark) 55%); color: inherit; padding: 0 .1em; }
+
+  /* Mục lục */
+  .toc { margin: 2.25rem 0 3rem; border-top: 2px solid var(--blue); }
+  .toc h2 { margin: .9rem 0 .25rem; font-size: .95rem; font-weight: 600; color: var(--muted); }
+  .toc ol { margin: 0; padding: 0; list-style: none; }
+  .toc a {
+    display: flex; align-items: baseline; gap: .25rem; padding: .7rem 0;
+    color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule);
+  }
+  .toc-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; line-height: 1.3; }
+  .toc-title small { display: block; font-family: var(--sans); font-size: .82rem; color: var(--muted); font-weight: 400; }
+  .toc-fill { flex: 1; min-width: 1rem; border-bottom: 2px dotted var(--rule); margin: 0 .5rem; transform: translateY(-.35rem); }
+  .toc-meta { font-weight: 600; font-size: .95rem; color: var(--blue); white-space: nowrap; }
+  .toc a:hover .toc-title, .toc a:focus-visible .toc-title { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Dự án */
+  .project {
+    background: var(--surface); border: 1px solid var(--rule); border-top: 4px solid var(--blue);
+    border-radius: 3px; margin: 0 0 2.25rem; padding: clamp(1.1rem, 3vw, 1.75rem);
+    scroll-margin-top: 1rem;
+  }
+  .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .project h2 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: clamp(1.4rem, 3.6vw, 1.85rem); line-height: 1.2; }
+  .year { color: var(--muted); font-size: .95rem; flex: none; }
+
+  .meta { margin: 1.1rem 0 1.4rem; border-top: 1px solid var(--rule); }
+  .meta > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--rule); }
+  .meta dt { margin: 0; font-size: .88rem; font-weight: 600; color: var(--muted); }
+  .meta dd { margin: 0; font-size: .95rem; }
+
+  .work h3 { margin: 0 0 .5rem; font-size: 1rem; font-weight: 600; color: var(--blue); }
+  .work ul { margin: 0; padding-left: 1.2rem; }
+  .work li { margin: 0 0 .5rem; padding-left: .2rem; max-width: 72ch; }
+  .work li::marker { color: var(--blue); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--rule); }
+  .btn {
+    display: inline-block; padding: .6rem 1rem; border-radius: 6px; font-size: .95rem; font-weight: 600;
+    text-decoration: none; border: 2px solid var(--blue); line-height: 1.2;
+  }
+  .btn.primary { background: var(--blue); color: #fff; }
+  .btn.primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+  .btn.secondary { background: transparent; color: var(--blue); }
+  .btn.secondary:hover { background: var(--tint); }
+  .btn[aria-disabled="true"] { background: transparent; color: var(--muted); border: 2px dashed var(--rule); cursor: default; font-weight: 500; }
+  a:focus-visible { outline: 3px solid #2B7BD0; outline-offset: 3px; }
+
+  .contact { margin-top: 1rem; color: var(--muted); font-size: .95rem; }
+  .contact a { color: var(--blue); font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .meta > div { grid-template-columns: 1fr; gap: .1rem; }
+    .project-head { flex-direction: column; gap: .2rem; }
+    .toc-fill { display: none; }
+    .toc a { justify-content: space-between; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <p class="who">Trịnh Quốc Toản</p>
+    <p class="role">Ứng viên thực tập Business Analyst</p>
+
+    <h1>Ba bộ SRS hoàn chỉnh, sẵn sàng để đọc.</h1>
+    <p class="lead">Sinh viên năm 4 ngành CNTT tại PTIT, có chứng chỉ ECBA (IIBA). Trang này gom <mark>3 dự án với tổng 56 use case</mark>, mỗi dự án có tài liệu SRS đầy đủ để bạn xem trực tiếp.</p>
+
+    <nav class="toc" aria-label="Mục lục dự án">
+      <h2>Các dự án</h2>
+      <ol>
+      <li><a href="#du-an-1"><span class="toc-title">Xây dựng SRS cho Nền tảng Thương mại điện tử<small>Bài tập cuối khóa, cá nhân</small></span><span class="toc-fill" aria-hidden="true"></span><span class="toc-meta">24 use case</span></a></li>
+      <li><a href="#du-an-2"><span class="toc-title">SmartFlix - Nền tảng Streaming ứng dụng AI<small>Dự án nhóm 4 người</small></span><span class="toc-fill" aria-hidden="true"></span><span class="toc-meta">16 use case</span></a></li>
+      <li><a href="#du-an-3"><span class="toc-title">Xây dựng SRS cho Hệ thống Đặt vé Xem phim trực tuyến<small>Dự án nhóm 8 người</small></span><span class="toc-fill" aria-hidden="true"></span><span class="toc-meta">16 use case</span></a></li>
+      </ol>
+    </nav>
+
+    <article class="project" id="du-an-1" aria-labelledby="du-an-1-t">
+      <header class="project-head">
+        <h2 id="du-an-1-t">Xây dựng SRS cho Nền tảng Thương mại điện tử</h2>
+        <span class="year">2026</span>
+      </header>
+      <dl class="meta">
+        <div><dt>Bối cảnh</dt><dd>Bài tập cuối khóa, Khóa học ECBA</dd></div>
+        <div><dt>Hình thức</dt><dd>Cá nhân</dd></div>
+        <div><dt>Vai trò</dt><dd>Xây dựng toàn bộ tài liệu SRS</dd></div>
+        <div><dt>Phạm vi</dt><dd>24 use case đặc tả chi tiết, phục vụ song song người bán và người mua</dd></div>
+        <div><dt>Tài liệu</dt><dd>SRS-TMDT-001, phiên bản 1.0</dd></div>
+        <div><dt>Xem nhanh</dt><dd>Quy tắc chung BR01 đến BR12 (mục III.1); bảng chuyển trạng thái đơn hàng (UC-11); yêu cầu phi chức năng (phần IV)</dd></div>
+        <div><dt>Từ khóa</dt><dd>SRS, use case, Business Rules, OTP/JWT, vòng đời đơn hàng, plugin Figma</dd></div>
+      </dl>
+      <div class="work">
+        <h3>Công việc đã làm</h3>
+        <ul>
+          <li>Xây dựng toàn bộ tài liệu SRS cho nền tảng thương mại điện tử phục vụ song song người bán và người mua, bao quát 24 use case được đặc tả xuống tới từng trường dữ liệu.</li>
+          <li>Đặc tả kiểu dữ liệu, quy tắc kiểm tra và thông báo lỗi cho các luồng đăng ký, xác thực OTP/JWT, quản lý sản phẩm và giỏ hàng, giúp lập trình viên triển khai không phải hỏi lại yêu cầu và hạn chế bỏ sót lỗi logic ở các trường hợp ngoại lệ (như OTP hết hạn).</li>
+          <li>Mô tả hành vi giao diện và luồng xử lý cho thanh toán và theo dõi vận chuyển đơn hàng, làm rõ hành vi hệ thống ở từng bước cho đội phát triển.</li>
+          <li>Thiết lập 12 Business Rules dùng chung về định dạng dữ liệu, validate đầu vào, tìm kiếm, phân trang, giới hạn dung lượng file và xử lý lỗi, đảm bảo tính nhất quán cho toàn bộ đặc tả.</li>
+          <li>Mô hình hóa vòng đời đơn hàng qua 5 trạng thái: Chờ xác nhận, Đã xác nhận, Đang vận chuyển, Hoàn thành và Đã hủy, đồng thời đặc tả bảng chuyển trạng thái ngăn chặn chuyển ngược hoặc chuyển từ trạng thái cuối.</li>
+          <li>Tự phát triển plugin Figma sinh wireframe tự động, rút ngắn khoảng 80% thời gian thiết kế giao diện so với vẽ tay, từ khoảng 30 phút xuống còn khoảng 5 phút mỗi màn hình.</li>
+          <li>Ứng dụng AI để rà soát toàn bộ 24 use case và đối chiếu với sản phẩm tương đương trên thị trường, đảm bảo tính đầy đủ và nhất quán trước khi hoàn thiện tài liệu.</li>
+        </ul>
+      </div>
+      <div class="actions"><a class="btn primary" data-link="tmdt.srs" href="#">Đọc SRS đầy đủ</a><a class="btn secondary" data-link="tmdt.br" data-optional href="#">Xem 12 Business Rules</a><a class="btn secondary" data-link="tmdt.wireframe" data-optional href="#">Xem wireframe Figma</a></div>
+    </article>
+    <article class="project" id="du-an-2" aria-labelledby="du-an-2-t">
+      <header class="project-head">
+        <h2 id="du-an-2-t">SmartFlix - Nền tảng Streaming ứng dụng AI</h2>
+        <span class="year">2026</span>
+      </header>
+      <dl class="meta">
+        <div><dt>Bối cảnh</dt><dd>Dự án nhóm, Môn Thực tập cơ sở</dd></div>
+        <div><dt>Hình thức</dt><dd>Nhóm 4 thành viên</dd></div>
+        <div><dt>Vai trò</dt><dd>Biên soạn tài liệu SRS làm nền tảng cho cả nhóm</dd></div>
+        <div><dt>Phạm vi</dt><dd>16 use case, 4 nhóm người dùng: khách, chủ tài khoản, người xem, quản trị hệ thống</dd></div>
+        <div><dt>Tài liệu</dt><dd>Báo cáo thực tập cơ sở nhóm 05, phần của tôi là Chương 2: Xác định yêu cầu</dd></div>
+        <div><dt>Sản phẩm</dt><dd>Web xem phim SmartFlix, nhóm triển khai bằng FastAPI và SQL Server, gợi ý phim bằng TF-IDF và K-Means</dd></div>
+        <div><dt>Xem nhanh</dt><dd>Bảng tổng hợp 16 use case (mục 2.4); kịch bản chi tiết từng use case (mục 2.5)</dd></div>
+        <div><dt>Từ khóa</dt><dd>SRS, yêu cầu phi chức năng, đa hồ sơ, K-Means, NLP</dd></div>
+      </dl>
+      <div class="work">
+        <h3>Công việc đã làm</h3>
+        <ul>
+          <li>Trực tiếp biên soạn tài liệu SRS làm nền tảng để cả nhóm 4 thành viên sử dụng để thiết kế cơ sở dữ liệu và API, bao quát 16 use case.</li>
+          <li>Soạn phát biểu bài toán nghiệp vụ và yêu cầu chức năng cho nền tảng streaming ứng dụng AI, thống nhất phạm vi và mục tiêu chung cho cả nhóm.</li>
+          <li>Xây dựng yêu cầu phi chức năng về công nghệ, hiệu năng và bảo mật, làm căn cứ để đội kỹ thuật lựa chọn giải pháp triển khai.</li>
+          <li>Đặc tả điều kiện trước/sau và luồng chính/ngoại lệ cho 4 nhóm người dùng: khách, chủ tài khoản, người xem và quản trị hệ thống, giúp các thành viên lập trình nắm rõ hành vi hệ thống theo từng vai trò.</li>
+          <li>Xác định yêu cầu cá nhân hóa: hỗ trợ đa hồ sơ (tối đa 5 hồ sơ mỗi tài khoản), lưu lịch sử xem và danh sách yêu thích riêng theo từng hồ sơ, giúp 3 thành viên còn lại thiết kế schema cơ sở dữ liệu đúng ngay từ đầu, không phải sửa lại sau khi đã code.</li>
+          <li>Phân tích và đặc tả tính năng gợi ý nội dung “More Like This”, định hướng đội kỹ thuật lựa chọn giải pháp kết hợp thuật toán phân cụm K-Means và xử lý ngôn ngữ tự nhiên NLP.</li>
+          <li>Sử dụng AI để gợi ý use case và tóm tắt tài liệu tham khảo trong giai đoạn nước rút của dự án, hỗ trợ soạn thảo đặc tả.</li>
+        </ul>
+      </div>
+      <div class="actions"><a class="btn primary" data-link="smartflix.srs" href="#">Đọc báo cáo đầy đủ</a></div>
+    </article>
+    <article class="project" id="du-an-3" aria-labelledby="du-an-3-t">
+      <header class="project-head">
+        <h2 id="du-an-3-t">Xây dựng SRS cho Hệ thống Đặt vé Xem phim trực tuyến</h2>
+        <span class="year">2026</span>
+      </header>
+      <dl class="meta">
+        <div><dt>Bối cảnh</dt><dd>Bài tập lớn cuối kỳ, Bộ môn Hệ quản trị Cơ sở dữ liệu</dd></div>
+        <div><dt>Hình thức</dt><dd>Nhóm 8 thành viên</dd></div>
+        <div><dt>Vai trò</dt><dd>Biên soạn phần xác định yêu cầu bài toán</dd></div>
+        <div><dt>Phạm vi</dt><dd>16 use case, 4 nhóm tác nhân</dd></div>
+        <div><dt>Tài liệu</dt><dd>Báo cáo bài tập lớn nhóm 02, phần của tôi là Chương 3: Xác định yêu cầu bài toán và mục 4.1: Phân quyền người dùng</dd></div>
+        <div><dt>Sản phẩm</dt><dd>Web đặt vé xem phim, nhóm triển khai bằng Node.js, Express và MongoDB</dd></div>
+        <div><dt>Từ khóa</dt><dd>SRS, ma trận phân quyền, giao dịch nguyên tử, MongoDB</dd></div>
+      </dl>
+      <div class="work">
+        <h3>Công việc đã làm</h3>
+        <ul>
+          <li>Trực tiếp biên soạn phần xác định yêu cầu bài toán cho hệ thống đặt vé xem phim trực tuyến, xác định 4 nhóm tác nhân và đặc tả 16 use case.</li>
+          <li>Đặc tả chức năng và luồng nghiệp vụ cho phân hệ khách hàng: tìm kiếm phim theo tên, thể loại và ngày chiếu, chọn chỗ ngồi, đặt vé và thanh toán online, giúp cả nhóm thống nhất cách hiểu về luồng đặt vé từ chọn ghế đến thanh toán.</li>
+          <li>Định nghĩa chức năng cho phân hệ quản trị: quản lý suất chiếu, quản lý phim, quản lý người dùng, quản lý phiếu giảm giá và thống kê doanh thu, làm rõ phạm vi chức năng cần lập trình cho đội phát triển.</li>
+          <li>Chi tiết hóa kịch bản hành vi cho từng use case gồm điều kiện tiên quyết, hậu điều kiện, chuỗi sự kiện chính và ngoại lệ, giúp đội Backend không bỏ sót các trường hợp ngoại lệ (ví dụ: hết ghế) khi lập trình.</li>
+          <li>Phân tích bài toán nghiệp vụ cốt lõi về xử lý đồng thời khi nhiều khách hàng cùng đặt một chỗ ngồi, đề xuất mục tiêu giải quyết bằng cơ chế giao dịch dữ liệu nguyên tử để tránh trùng ghế.</li>
+          <li>Xây dựng ma trận phân quyền chức năng cho 3 vai trò người dùng gồm quản lý, nhân viên và khách hàng, làm cơ sở để đội Backend thiết kế middleware xác thực.</li>
+          <li>Phối hợp với nhóm 8 thành viên xuyên suốt dự án, đảm bảo tài liệu yêu cầu khớp với thiết kế cơ sở dữ liệu MongoDB do đội kỹ thuật triển khai.</li>
+        </ul>
+      </div>
+      <div class="actions"><a class="btn primary" data-link="datve.chuong3" href="#">Đọc Chương 3: Xác định yêu cầu</a><a class="btn secondary" data-link="datve.srs" data-optional href="#">Xem báo cáo đầy đủ</a></div>
+    </article>
+
+    <p class="contact">Liên hệ: <a href="mailto:toanquoctrinh372005@gmail.com">toanquoctrinh372005@gmail.com</a></p>
+  </main>
+
+<script>
+  /* ============================================================
+     CHỈ CẦN SỬA Ở ĐÂY: dán link tài liệu vào giữa cặp dấu "".
+     Để trống: nút SRS hiện "Link đang cập nhật", nút wireframe tự ẩn.
+     Lưu ý: link Google Drive phải để chế độ "Bất kỳ ai có đường liên kết".
+     ============================================================ */
+  var LINKS = {
+    tmdt:      { srs: "https://docs.google.com/document/d/e/2PACX-1vT0H7Mc-YtikZ3Y6On_adJHWO4DHnxrqFQTKbTNppZceolwYWCHDlIr_mqLYg96bQ/pub", br: "https://docs.google.com/document/d/e/2PACX-1vT0H7Mc-YtikZ3Y6On_adJHWO4DHnxrqFQTKbTNppZceolwYWCHDlIr_mqLYg96bQ/pub#h.6knw8yuf66ev", wireframe: "" },
+    smartflix: { srs: "https://docs.google.com/document/d/e/2PACX-1vQvuYSYM01phMF6eq3TVez6h6_It8TSfoRn2QHvjACBvhYaQ1MIashVwuKyEP63c6KAQrazq-Kg_vVi/pub" },
+    datve:     { srs: "https://docs.google.com/document/d/e/2PACX-1vRfVfkXpjFCj-OeQkikCCk093DDpkhh7AKylLkGfP0dz1xgHd2gofXn_Np7i66a8cLgXrY2DVjROSdy/pub", chuong3: "https://docs.google.com/document/d/e/2PACX-1vRfVfkXpjFCj-OeQkikCCk093DDpkhh7AKylLkGfP0dz1xgHd2gofXn_Np7i66a8cLgXrY2DVjROSdy/pub#h.rsiqek49uio0" }
+  };
+
+  document.querySelectorAll("[data-link]").forEach(function (a) {
+    var parts = a.getAttribute("data-link").split(".");
+    var url = (LINKS[parts[0]] || {})[parts[1]];
+    if (url) {
+      a.href = url;
+      a.target = "_blank";       /* bắt buộc: Google Sites không cho mở Drive trong khung nhúng */
+      a.rel = "noopener noreferrer";
+    } else if (a.hasAttribute("data-optional")) {
+      a.style.display = "none";   /* nút tùy chọn: chưa có link thì ẩn */
+    } else {
+      a.setAttribute("aria-disabled", "true");
+      a.textContent = "Link đang cập nhật";
+      a.addEventListener("click", function (ev) { ev.preventDefault(); });
+    }
+  });
+
+  /* === Tự gửi chiều cao thực tế lên Google Sites để resize iframe === */
+  function sendHeight() {
+    var h = document.documentElement.scrollHeight;
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'embed-size', height: h }, '*');
+      /* Google Sites lắng nghe message dạng này để auto-resize iframe */
+      window.parent.postMessage(h, '*');
+    }
+  }
+  /* Gửi ngay khi load và sau mỗi lần resize */
+  window.addEventListener('load', function () {
+    sendHeight();
+    /* Gửi lại vài lần phòng trường hợp font/ảnh load chậm */
+    setTimeout(sendHeight, 500);
+    setTimeout(sendHeight, 1500);
+    setTimeout(sendHeight, 3000);
+  });
+  window.addEventListener('resize', sendHeight);
+  /* MutationObserver: nếu DOM thay đổi thì gửi lại chiều cao */
+  if (typeof MutationObserver !== 'undefined') {
+    new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true });
+  }
+</script>
+</body>
+</html>
